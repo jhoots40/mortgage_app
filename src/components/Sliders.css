@@ -1,0 +1,55 @@
+.principal {
+    padding: 0px 1% 0px 1%;
+    border: none;
+}
+
+.unit {
+    width: 48.5%;
+    float: left;
+    padding: 0px 0.5% 0px 1%;
+}
+
+.tenth {
+    width: 15.666%;
+    float: left;
+    padding: 0px 0.5% 0px 0.5%;
+}
+
+.hundredth {
+    width: 15.666%;
+    float: left;
+    padding: 0px 0.5% 0px 0.5%;
+}
+
+.thousandth {
+    width: 15.166%;
+    float: left;
+    padding: 0px 1% 0px 0.5%;
+}
+
+.total-year {
+    width: 31.833%;
+    padding: 0% 0.5% 0% 1%;
+    float: left;
+}
+
+.start-month {
+    width: 32.333%;
+    padding: 0% 0.5% 0% 0.5%;
+    float: left;
+}
+
+.start-year {
+    width: 31.833%;
+    padding: 0% 1% 0% 0.5%;
+    float: left;
+}
+
+p {
+    margin: 0;
+    padding: 0px 1% 0px 1%;
+}
+
+h3 {
+    padding: 0px 1% 0px 1%;
+}
