@@ -2,7 +2,8 @@ import React from "react";
 import Slider from "@mui/material/Slider";
 import "./Sliders.css";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useState } from "react";
+import { actions } from "../store";
+import { useSelector, useDispatch } from "react-redux";
 
 const months = [
   "Jan",
@@ -37,19 +38,16 @@ const theme = createTheme({
 });
 
 function Sliders() {
-  function handleMonths(e) {
-    setMonth(months[e.target.value]);
-  }
-
-  const [principal, setPrincipal] = useState(100000);
-  const [payment, setPayment] = useState(500);
-  const [interest, setInterest] = useState(5);
-  const [tens, setTens] = useState(0);
-  const [hundreds, setHundreds] = useState(0);
-  const [thousands, setThousands] = useState(0);
-  const [years, setYears] = useState(30);
-  const [month, setMonth] = useState("Jun");
-  const [startYear, setStartYear] = useState(2023);
+  const dispatch = useDispatch();
+  const principal = useSelector((state) => state.principal);
+  const payment = useSelector((state) => state.payment);
+  const interest = useSelector((state) => state.interest);
+  const tens = useSelector((state) => state.int_tens);
+  const hundreds = useSelector((state) => state.int_hund);
+  const thousands = useSelector((state) => state.int_thou);
+  const years = useSelector((state) => state.years);
+  const month = useSelector((state) => state.start_month);
+  const startYear = useSelector((state) => state.start_year);
 
   return (
     <ThemeProvider theme={theme}>
@@ -62,7 +60,8 @@ function Sliders() {
           valueLabelDisplay="off"
           color="blue"
           step={1000}
-          onChange={(e) => setPrincipal(e.target.value)}
+          onChange={(e) => dispatch(actions.setPrincipal(e.target.value))}
+          sx={{ margin: 0, padding: 0 }}
         />
         <p>Principal</p>
       </div>
@@ -74,7 +73,8 @@ function Sliders() {
           max={20}
           valueLabelDisplay="off"
           color="red"
-          onChange={(e) => setInterest(e.target.value)}
+          onChange={(e) => dispatch(actions.setInterest(e.target.value))}
+          sx={{ margin: 0, padding: 0 }}
         />
         <p>Interest</p>
       </div>
@@ -86,7 +86,8 @@ function Sliders() {
           max={9}
           valueLabelDisplay="off"
           color="red"
-          onChange={(e) => setTens(e.target.value)}
+          onChange={(e) => dispatch(actions.setTens(e.target.value))}
+          sx={{ margin: 0, padding: 0 }}
         />
         <p>.0</p>
       </div>
@@ -99,7 +100,8 @@ function Sliders() {
           max={9}
           valueLabelDisplay="off"
           color="red"
-          onChange={(e) => setHundreds(e.target.value)}
+          onChange={(e) => dispatch(actions.setHund(e.target.value))}
+          sx={{ margin: 0, padding: 0 }}
         />
         <p>.00</p>
       </div>
@@ -112,7 +114,8 @@ function Sliders() {
           max={9}
           valueLabelDisplay="off"
           color="red"
-          onChange={(e) => setThousands(e.target.value)}
+          onChange={(e) => dispatch(actions.setThou(e.target.value))}
+          sx={{ margin: 0, padding: 0 }}
         />
         <p>.000</p>
       </div>
@@ -125,7 +128,8 @@ function Sliders() {
           max={50}
           valueLabelDisplay="off"
           color="gold"
-          onChange={(e) => setYears(e.target.value)}
+          onChange={(e) => dispatch(actions.setYears(e.target.value))}
+          sx={{ margin: 0, padding: 0 }}
         />
         <p>Years</p>
       </div>
@@ -137,7 +141,10 @@ function Sliders() {
           max={11}
           valueLabelDisplay="off"
           color="gold"
-          onChange={handleMonths}
+          onChange={(e) =>
+            dispatch(actions.setStartMonth(months[e.target.value]))
+          }
+          sx={{ margin: 0, padding: 0 }}
         />
         <p>Start Month</p>
       </div>
@@ -149,7 +156,8 @@ function Sliders() {
           max={2028}
           valueLabelDisplay="off"
           color="gold"
-          onChange={(e) => setStartYear(e.target.value)}
+          onChange={(e) => dispatch(actions.setStartYear(e.target.value))}
+          sx={{ margin: 0, padding: 0 }}
         />
         <p>Start Year</p>
       </div>
@@ -161,8 +169,9 @@ function Sliders() {
           max={2500}
           valueLabelDisplay="off"
           color="green"
-          onChange={(e) => setPayment(e.target.value)}
+          onChange={(e) => dispatch(actions.setPayment(e.target.value))}
           step={10}
+          sx={{ margin: 0, padding: 0 }}
         />
         <p>Payment</p>
       </div>
