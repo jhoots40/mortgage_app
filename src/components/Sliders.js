@@ -164,7 +164,8 @@ function Sliders() {
       <div className="principal">
         <p align="center">{payment}</p>
         <Slider
-          defaultValue={500}
+          defaultValue={payment}
+          value={payment}
           min={0}
           max={2500}
           valueLabelDisplay="off"
