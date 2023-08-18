@@ -11,8 +11,8 @@ function PieChart({ interestPaid, principalPaid }) {
       {
         label: "Percentage Paid",
         data: [interestPaid, principalPaid],
-        backgroundColor: ["rgba(255, 99, 132, 0.2)", "rgba(54, 162, 235, 0.2)"],
-        borderColor: ["rgba(255, 99, 132, 1)", "rgba(54, 162, 235, 1)"],
+        backgroundColor: ["rgba(188, 44, 42, 0.4)", "rgba(77, 110, 208, 0.4)"],
+        borderColor: ["rgba(188, 44, 42, 1)", "rgba(77, 110, 208, 1)"],
         borderWidth: 1,
       },
     ],

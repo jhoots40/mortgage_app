@@ -31,8 +31,8 @@ function BalanceChart({ mortgage }) {
         fill: true,
         label: "Remaining Principal",
         data: mortgage.map((i) => i.remaining),
-        borderColor: "rgb(53, 162, 235)",
-        backgroundColor: "rgba(53, 162, 235, 0.5)",
+        borderColor: "rgba(77, 110, 208, 1)",
+        backgroundColor: "rgba(77, 110, 208, 0.5)",
       },
     ],
   };

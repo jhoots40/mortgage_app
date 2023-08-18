@@ -64,7 +64,7 @@ function AnnualTable({ mortgage }) {
               {columns.map((column) => (
                 <TableCell
                   key={column.id}
-                  align={column.align}
+                  align="center"
                   style={{
                     minWidth: column.minWidth,
                     color: column.color,
@@ -84,14 +84,18 @@ function AnnualTable({ mortgage }) {
                   "&:last-child td, &:last-child th": { border: 0 },
                 }}
               >
-                <TableCell>{val.id}</TableCell>
-                <TableCell>{val.int_payment.toFixed(2)}</TableCell>
-                <TableCell>{val.prin_payment.toFixed(2)}</TableCell>
-                <TableCell>
+                <TableCell align="center">{val.id}</TableCell>
+                <TableCell align="center">
+                  {val.int_payment.toFixed(2)}
+                </TableCell>
+                <TableCell align="center">
+                  {val.prin_payment.toFixed(2)}
+                </TableCell>
+                <TableCell align="center">
                   {(val.int_payment + val.prin_payment).toFixed(2)}
                 </TableCell>
-                <TableCell>{0}</TableCell>
-                <TableCell>{val.remaining.toFixed(2)}</TableCell>
+                <TableCell align="center">{0}</TableCell>
+                <TableCell align="center">{val.remaining.toFixed(2)}</TableCell>
               </TableRow>
             ))}
           </TableBody>

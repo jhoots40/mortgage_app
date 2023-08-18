@@ -27,10 +27,10 @@ function InterestChart({ interest, years }) {
     labels: years,
     datasets: [
       {
-        label: "Remaining Principal",
+        label: "Interest",
         data: years.map(() => interest),
-        borderColor: "rgba(255, 99, 132, 1)",
-        backgroundColor: "rgba(255, 99, 132, 0.5)",
+        borderColor: "rgba(188, 44, 42, 1)",
+        backgroundColor: "rgba(188, 44, 42, 0.5)",
       },
     ],
   };
@@ -47,7 +47,7 @@ function InterestChart({ interest, years }) {
       y: {
         title: {
           display: true,
-          text: "Payment",
+          text: "Rate %",
         },
         min: 0,
       },
