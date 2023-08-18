@@ -11,16 +11,12 @@ import AmortChart from "./AmortChart";
 import BalanceChart from "./BalanceChart";
 import InterestChart from "./InterestChart";
 import AnnualTable from "./AnnualTable";
-import { actions } from "../store";
+import { generateMortgage } from "../utils/generateData";
 
 function ChartTabs() {
   const dispatch = useDispatch();
   const [selectLeft, setSelectLeft] = useState(0);
   const [selectRight, setSelectRight] = useState(0);
-  const [interestPaid, setInterestPaid] = useState(0);
-  const [principalPaid, setPrincipalPaid] = useState(0);
-  const [mortgage, setMortgage] = useState([]);
-  const [totInterest, setTotInterest] = useState(0);
 
   const principal = useSelector((state) => state.principal);
   const years = useSelector((state) => state.years);
@@ -28,54 +24,34 @@ function ChartTabs() {
   const int_tens = useSelector((state) => state.int_tens);
   const int_hund = useSelector((state) => state.int_hund);
   const int_thou = useSelector((state) => state.int_thou);
+  const startYear = useSelector((state) => state.start_year);
+  const startMonth = useSelector((state) => state.start_month);
+  const monthlyMortgage = useSelector((state) => state.monthlyMortgage);
+  const yearlyMortgage = useSelector((state) => state.yearlyMortgage);
 
   useEffect(() => {
-    // Function to run when any of the state values change
-    let totalInterest =
-      interest +
-      Number(int_tens / 10) +
-      Number(int_hund / 100) +
-      Number(int_thou / 1000);
-    totalInterest /= 100;
-
-    setTotInterest(totalInterest);
-
-    let monthlyInterestRate = totalInterest / 12;
-    let numberOfPayments = years * 12;
-    let monthlyPaymentCalc =
-      (principal * monthlyInterestRate) /
-      (1 - Math.pow(1 + monthlyInterestRate, -numberOfPayments));
-    let remainingPrincipal = principal;
-    dispatch(actions.setPayment(parseInt(monthlyPaymentCalc)));
-
-    let totInterest = 0;
-    let totPrincipal = 0;
-
-    let mortgageInfo = [];
-
-    for (let i = 1; i <= numberOfPayments; i++) {
-      let interestPayment = remainingPrincipal * monthlyInterestRate;
-      totInterest += interestPayment;
-      let principalPayment = monthlyPaymentCalc - interestPayment;
-      totPrincipal += principalPayment;
-      remainingPrincipal -= principalPayment;
-
-      if (i % 12 === 0) {
-        let toAdd = {
-          id: i / 12 + 2023,
-          prin_payment: principalPayment,
-          int_payment: interestPayment,
-          remaining: remainingPrincipal,
-        };
-        mortgageInfo.push(toAdd);
-      }
-    }
-
-    setInterestPaid((totInterest / (totInterest + totPrincipal)) * 100);
-    setPrincipalPaid((totPrincipal / (totInterest + totPrincipal)) * 100);
-    setMortgage(mortgageInfo);
-    console.log(mortgageInfo);
-  }, [principal, years, interest, int_tens, int_hund, int_thou, dispatch]);
+    generateMortgage(
+      principal,
+      years,
+      interest,
+      int_tens,
+      int_hund,
+      int_thou,
+      startYear,
+      startMonth,
+      dispatch
+    );
+  }, [
+    principal,
+    years,
+    interest,
+    int_tens,
+    int_hund,
+    int_thou,
+    startYear,
+    startMonth,
+    dispatch,
+  ]);
 
   const handleLeft = (event, newValue) => {
     setSelectLeft(newValue);
@@ -101,22 +77,16 @@ function ChartTabs() {
             <Tab label="Interest" value={3} />
           </Tabs>
           <TabPanel sx={{ height: 440, textAlign: "center" }} value={0}>
-            <AmortChart mortgage={mortgage}></AmortChart>
+            <AmortChart mortgage={monthlyMortgage}></AmortChart>
           </TabPanel>
           <TabPanel sx={{ height: 440, textAlign: "center" }} value={1}>
-            <PieChart
-              interestPaid={interestPaid}
-              principalPaid={principalPaid}
-            ></PieChart>
+            <PieChart mortgage={monthlyMortgage}></PieChart>
           </TabPanel>
           <TabPanel sx={{ height: 440, textAlign: "center" }} value={2}>
-            <BalanceChart mortgage={mortgage}></BalanceChart>
+            <BalanceChart mortgage={monthlyMortgage}></BalanceChart>
           </TabPanel>
           <TabPanel sx={{ height: 440, textAlign: "center" }} value={3}>
-            <InterestChart
-              interest={totInterest}
-              years={mortgage.map((i) => i.id)}
-            ></InterestChart>
+            <InterestChart mortgage={monthlyMortgage}></InterestChart>
           </TabPanel>
         </TabContext>
       </div>
@@ -134,7 +104,7 @@ function ChartTabs() {
             <Tab label="Summary" />
           </Tabs>
           <TabPanel sx={{ height: 440, textAlign: "center" }} value={0}>
-            <AnnualTable mortgage={mortgage}></AnnualTable>
+            <AnnualTable mortgage={yearlyMortgage}></AnnualTable>
           </TabPanel>
           <TabPanel value={1}></TabPanel>
           <TabPanel value={2}></TabPanel>

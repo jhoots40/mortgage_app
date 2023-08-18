@@ -134,16 +134,14 @@ function Sliders() {
         <p>Years</p>
       </div>
       <div className="start-month">
-        <p align="center">{month}</p>
+        <p align="center">{months[month]}</p>
         <Slider
           defaultValue={5}
           min={0}
           max={11}
           valueLabelDisplay="off"
           color="gold"
-          onChange={(e) =>
-            dispatch(actions.setStartMonth(months[e.target.value]))
-          }
+          onChange={(e) => dispatch(actions.setStartMonth(e.target.value))}
           sx={{ margin: 0, padding: 0 }}
         />
         <p>Start Month</p>

@@ -24,24 +24,32 @@ ChartJS.register(
 );
 
 function AmortChart({ mortgage }) {
-  let data2 = {
-    labels: mortgage.map((i) => i.id),
-    datasets: [
-      {
-        fill: true,
-        label: "Principal",
-        data: mortgage.map((i) => i.prin_payment),
-        borderColor: "rgba(77, 110, 208, 1)",
-        backgroundColor: "rgba(77, 110, 208, 0.5)",
-      },
-      {
-        fill: true,
-        label: "Interest",
-        data: mortgage.map((i) => i.int_payment),
-        borderColor: "rgba(188, 44, 42, 1)",
-        backgroundColor: "rgba(188, 44, 42, 0.5)",
-      },
-    ],
+  const generateData = (mortgage) => {
+    let info = [];
+
+    for (var i = 0; i < mortgage.length; i += 12) info.push(mortgage[i]);
+
+    let data2 = {
+      labels: info.map((i) => i.id),
+      datasets: [
+        {
+          fill: true,
+          label: "Principal",
+          data: info.map((i) => i.prin_payment),
+          borderColor: "rgba(77, 110, 208, 1)",
+          backgroundColor: "rgba(77, 110, 208, 0.5)",
+        },
+        {
+          fill: true,
+          label: "Interest",
+          data: info.map((i) => i.int_payment),
+          borderColor: "rgba(188, 44, 42, 1)",
+          backgroundColor: "rgba(188, 44, 42, 0.5)",
+        },
+      ],
+    };
+
+    return data2;
   };
 
   let options = {
@@ -77,7 +85,7 @@ function AmortChart({ mortgage }) {
         height: "100%",
       }}
     >
-      <Line data={data2} options={options} />
+      <Line data={generateData(mortgage)} options={options} />
     </div>
   );
 }

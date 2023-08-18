@@ -10,8 +10,10 @@ const sliderSlice = createSlice({
     int_hund: 0,
     int_thou: 0,
     years: 30,
-    start_month: "Jun",
+    start_month: 6,
     start_year: 2023,
+    yearlyMortgage: [],
+    monthlyMortgage: [],
   },
   reducers: {
     setPrincipal(state, action) {
@@ -40,6 +42,12 @@ const sliderSlice = createSlice({
     },
     setStartYear(state, action) {
       state.start_year = action.payload;
+    },
+    setYearlyMortgage(state, action) {
+      state.yearlyMortgage = action.payload;
+    },
+    setMonthlyMortgage(state, action) {
+      state.monthlyMortgage = action.payload;
     },
   },
 });

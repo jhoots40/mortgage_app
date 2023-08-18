@@ -22,17 +22,25 @@ ChartJS.register(
   Legend
 );
 
-function InterestChart({ interest, years }) {
-  let data = {
-    labels: years,
-    datasets: [
-      {
-        label: "Interest",
-        data: years.map(() => interest),
-        borderColor: "rgba(188, 44, 42, 1)",
-        backgroundColor: "rgba(188, 44, 42, 0.5)",
-      },
-    ],
+function InterestChart({ mortgage }) {
+  const generateData = (mortgage) => {
+    let info = [];
+
+    for (var i = 0; i < mortgage.length; i += 12) info.push(mortgage[i]);
+
+    let data = {
+      labels: info.map((m) => m.id),
+      datasets: [
+        {
+          label: "Interest",
+          data: info.map((m) => m.interest),
+          borderColor: "rgba(188, 44, 42, 1)",
+          backgroundColor: "rgba(188, 44, 42, 0.5)",
+        },
+      ],
+    };
+
+    return data;
   };
 
   let options = {
@@ -63,7 +71,7 @@ function InterestChart({ interest, years }) {
         height: "100%",
       }}
     >
-      <Line data={data} options={options}></Line>
+      <Line data={generateData(mortgage)} options={options}></Line>
     </div>
   );
 }

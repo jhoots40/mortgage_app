@@ -24,17 +24,24 @@ ChartJS.register(
 );
 
 function BalanceChart({ mortgage }) {
-  let data = {
-    labels: mortgage.map((i) => i.id),
-    datasets: [
-      {
-        fill: true,
-        label: "Remaining Principal",
-        data: mortgage.map((i) => i.remaining),
-        borderColor: "rgba(77, 110, 208, 1)",
-        backgroundColor: "rgba(77, 110, 208, 0.5)",
-      },
-    ],
+  const generateData = (mortgage) => {
+    let info = [];
+
+    for (var i = 0; i < mortgage.length; i += 12) info.push(mortgage[i]);
+
+    let data = {
+      labels: info.map((i) => i.id),
+      datasets: [
+        {
+          fill: true,
+          label: "Remaining Principal",
+          data: info.map((i) => i.remaining),
+          borderColor: "rgba(77, 110, 208, 1)",
+          backgroundColor: "rgba(77, 110, 208, 0.5)",
+        },
+      ],
+    };
+    return data;
   };
 
   let options = {
@@ -71,7 +78,7 @@ function BalanceChart({ mortgage }) {
         height: "100%",
       }}
     >
-      <Line data={data} options={options}></Line>
+      <Line data={generateData(mortgage)} options={options}></Line>
     </div>
   );
 }
