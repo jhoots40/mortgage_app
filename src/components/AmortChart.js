@@ -45,6 +45,7 @@ function AmortChart({ mortgage }) {
   };
 
   let options = {
+    maintainAspectRatio: false, // This is important to prevent the chart from expanding to full width
     scales: {
       x: {
         title: {
@@ -67,7 +68,18 @@ function AmortChart({ mortgage }) {
     },
   };
 
-  return <Line data={data2} options={options} />;
+  return (
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100%",
+      }}
+    >
+      <Line data={data2} options={options} />
+    </div>
+  );
 }
 
 export default AmortChart;

@@ -18,7 +18,22 @@ function PieChart({ interestPaid, principalPaid }) {
     ],
   };
 
-  return <Pie data={data} />;
+  const options = {
+    maintainAspectRatio: false, // This is important to prevent the chart from expanding to full width
+  };
+
+  return (
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100%",
+      }}
+    >
+      <Pie data={data} options={options} />
+    </div>
+  );
 }
 
 export default PieChart;

@@ -36,6 +36,7 @@ function InterestChart({ interest, years }) {
   };
 
   let options = {
+    maintainAspectRatio: false, // This is important to prevent the chart from expanding to full width
     scales: {
       x: {
         title: {
@@ -54,9 +55,16 @@ function InterestChart({ interest, years }) {
   };
 
   return (
-    <>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100%",
+      }}
+    >
       <Line data={data} options={options}></Line>
-    </>
+    </div>
   );
 }
 

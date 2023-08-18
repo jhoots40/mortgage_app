@@ -38,6 +38,7 @@ function BalanceChart({ mortgage }) {
   };
 
   let options = {
+    maintainAspectRatio: false, // This is important to prevent the chart from expanding to full width
     scales: {
       x: {
         title: {
@@ -61,7 +62,18 @@ function BalanceChart({ mortgage }) {
     },
   };
 
-  return <Line data={data} options={options}></Line>;
+  return (
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100%",
+      }}
+    >
+      <Line data={data} options={options}></Line>
+    </div>
+  );
 }
 
 export default BalanceChart;

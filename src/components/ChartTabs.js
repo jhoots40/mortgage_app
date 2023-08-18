@@ -74,6 +74,7 @@ function ChartTabs() {
     setInterestPaid((totInterest / (totInterest + totPrincipal)) * 100);
     setPrincipalPaid((totPrincipal / (totInterest + totPrincipal)) * 100);
     setMortgage(mortgageInfo);
+    console.log(mortgageInfo);
   }, [principal, years, interest, int_tens, int_hund, int_thou, dispatch]);
 
   const handleLeft = (event, newValue) => {
@@ -99,19 +100,19 @@ function ChartTabs() {
             <Tab label="Balance" value={2} />
             <Tab label="Interest" value={3} />
           </Tabs>
-          <TabPanel value={0}>
+          <TabPanel sx={{ height: 440, textAlign: "center" }} value={0}>
             <AmortChart mortgage={mortgage}></AmortChart>
           </TabPanel>
-          <TabPanel value={1}>
+          <TabPanel sx={{ height: 440, textAlign: "center" }} value={1}>
             <PieChart
               interestPaid={interestPaid}
               principalPaid={principalPaid}
             ></PieChart>
           </TabPanel>
-          <TabPanel value={2}>
+          <TabPanel sx={{ height: 440, textAlign: "center" }} value={2}>
             <BalanceChart mortgage={mortgage}></BalanceChart>
           </TabPanel>
-          <TabPanel value={3}>
+          <TabPanel sx={{ height: 440, textAlign: "center" }} value={3}>
             <InterestChart
               interest={totInterest}
               years={mortgage.map((i) => i.id)}
@@ -132,7 +133,7 @@ function ChartTabs() {
             <Tab label="Payments" />
             <Tab label="Summary" />
           </Tabs>
-          <TabPanel value={0}>
+          <TabPanel sx={{ height: 440, textAlign: "center" }} value={0}>
             <AnnualTable mortgage={mortgage}></AnnualTable>
           </TabPanel>
           <TabPanel value={1}></TabPanel>

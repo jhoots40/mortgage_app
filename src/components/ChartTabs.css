@@ -1,11 +1,13 @@
 .left-tabs {
   width: 48.5%;
+  height: 440px;
   float: left;
   margin: 0px 0.5% 0px 1%;
 }
 
 .right-tabs {
   width: 48.5%;
+  height: 440px;
   float: left;
   margin: 0px 1% 0px 0.5%;
 }
