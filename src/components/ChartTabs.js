@@ -11,6 +11,7 @@ import AmortChart from "./AmortChart";
 import BalanceChart from "./BalanceChart";
 import InterestChart from "./InterestChart";
 import AnnualTable from "./AnnualTable";
+import MonthTable from "./MonthTable";
 import { generateMortgage } from "../utils/generateData";
 
 function ChartTabs() {
@@ -106,7 +107,9 @@ function ChartTabs() {
           <TabPanel sx={{ height: 440, textAlign: "center" }} value={0}>
             <AnnualTable mortgage={yearlyMortgage}></AnnualTable>
           </TabPanel>
-          <TabPanel value={1}></TabPanel>
+          <TabPanel sx={{ textAlign: "center" }} value={1}>
+            <MonthTable mortgage={monthlyMortgage}></MonthTable>
+          </TabPanel>
           <TabPanel value={2}></TabPanel>
           <TabPanel value={3}></TabPanel>
         </TabContext>

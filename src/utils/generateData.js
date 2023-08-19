@@ -52,8 +52,9 @@ export const generateMortgage = (
     remainingPrincipal -= principalPayment;
 
     let toAdd = {
-      id: Math.floor((i + start_month) / 12) + 2023,
+      id: Math.floor((i + start_month) / 12) + start_year,
       month: months[(i + start_month) % 12],
+      month_idx: (i + start_month) % 12,
       prin_payment: principalPayment,
       int_payment: interestPayment,
       remaining: remainingPrincipal,
@@ -80,6 +81,4 @@ export const generateMortgage = (
 
   dispatch(actions.setMonthlyMortgage(monthlyMortgageInfo));
   dispatch(actions.setYearlyMortgage(yearlyMortgageInfo));
-  console.log(monthlyMortgageInfo);
-  console.log(yearlyMortgageInfo);
 };
