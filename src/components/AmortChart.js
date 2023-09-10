@@ -27,7 +27,10 @@ function AmortChart({ mortgage }) {
   const generateData = (mortgage) => {
     let info = [];
 
-    for (var i = 0; i < mortgage.length; i += 12) info.push(mortgage[i]);
+    for (var i = 0; i < mortgage.length; i += 12) {
+      info.push(mortgage[i]);
+      if (i + 12 >= mortgage.length) info.push(mortgage[mortgage.length - 1]);
+    }
 
     let data2 = {
       labels: info.map((i) => i.id),

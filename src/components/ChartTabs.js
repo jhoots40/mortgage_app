@@ -12,12 +12,16 @@ import BalanceChart from "./BalanceChart";
 import InterestChart from "./InterestChart";
 import AnnualTable from "./AnnualTable";
 import MonthTable from "./MonthTable";
+import PaymentTable from "./PaymentTable";
+import LoanData from "./LoanData";
 import { generateMortgage } from "../utils/generateData";
+import { Box } from "@mui/system";
 
 function ChartTabs() {
   const dispatch = useDispatch();
   const [selectLeft, setSelectLeft] = useState(0);
   const [selectRight, setSelectRight] = useState(0);
+  const [selectBottom, setSelectBottom] = useState(0);
 
   const principal = useSelector((state) => state.principal);
   const years = useSelector((state) => state.years);
@@ -60,6 +64,10 @@ function ChartTabs() {
 
   const handleRight = (event, newValue) => {
     setSelectRight(newValue);
+  };
+
+  const handleBottom = (event, newValue) => {
+    setSelectBottom(newValue);
   };
 
   return (
@@ -107,13 +115,69 @@ function ChartTabs() {
           <TabPanel sx={{ height: 440, textAlign: "center" }} value={0}>
             <AnnualTable mortgage={yearlyMortgage}></AnnualTable>
           </TabPanel>
-          <TabPanel sx={{ textAlign: "center" }} value={1}>
+          <TabPanel sx={{ height: 440, textAlign: "center" }} value={1}>
             <MonthTable mortgage={monthlyMortgage}></MonthTable>
           </TabPanel>
-          <TabPanel value={2}></TabPanel>
-          <TabPanel value={3}></TabPanel>
+          <TabPanel sx={{ height: 440, textAlign: "center" }} value={2}>
+            <PaymentTable mortgage={monthlyMortgage}></PaymentTable>
+          </TabPanel>
+          <TabPanel
+            sx={{ height: 440, textAlign: "center" }}
+            value={3}
+          ></TabPanel>
         </TabContext>
       </div>
+      <Box
+        sx={{
+          mt: "550px",
+          paddingLeft: "1%",
+          paddingRight: "1%",
+        }}
+      >
+        <TabContext value={selectBottom}>
+          <Tabs
+            value={selectBottom}
+            onChange={handleBottom}
+            centered
+            variant="fullWidth"
+          >
+            <Tab label="Loan Data" value={0} />
+            <Tab label="Expenses" value={1} />
+            <Tab label="Prepayment" value={2} />
+            <Tab label="Extra" value={3} />
+            <Tab label="Fixed" value={4} />
+            <Tab label="Interest" value={5} />
+            <Tab label="ARM" value={6} />
+          </Tabs>
+          <TabPanel sx={{ height: 220, textAlign: "center" }} value={0}>
+            <LoanData></LoanData>
+          </TabPanel>
+          <TabPanel
+            sx={{ height: 440, textAlign: "center" }}
+            value={1}
+          ></TabPanel>
+          <TabPanel
+            sx={{ height: 440, textAlign: "center" }}
+            value={2}
+          ></TabPanel>
+          <TabPanel
+            sx={{ height: 440, textAlign: "center" }}
+            value={3}
+          ></TabPanel>
+          <TabPanel
+            sx={{ height: 440, textAlign: "center" }}
+            value={4}
+          ></TabPanel>
+          <TabPanel
+            sx={{ height: 440, textAlign: "center" }}
+            value={5}
+          ></TabPanel>
+          <TabPanel
+            sx={{ height: 440, textAlign: "center" }}
+            value={6}
+          ></TabPanel>
+        </TabContext>
+      </Box>
     </>
   );
 }

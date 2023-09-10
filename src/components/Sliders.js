@@ -60,32 +60,35 @@ function Sliders() {
           valueLabelDisplay="off"
           color="blue"
           step={1000}
+          value={principal}
           onChange={(e) => dispatch(actions.setPrincipal(e.target.value))}
           sx={{ margin: 0, padding: 0 }}
         />
         <p>Principal</p>
       </div>
       <div className="unit">
-        <p align="center">{interest}</p>
+        <p align="center">{interest || 0}</p>
         <Slider
           defaultValue={5}
           min={0}
           max={20}
           valueLabelDisplay="off"
           color="red"
+          value={interest || 5}
           onChange={(e) => dispatch(actions.setInterest(e.target.value))}
           sx={{ margin: 0, padding: 0 }}
         />
         <p>Interest</p>
       </div>
       <div className="tenth">
-        <p align="center">{tens}</p>
+        <p align="center">{tens || 0}</p>
         <Slider
           defaultValue={0}
           min={0}
           max={9}
           valueLabelDisplay="off"
           color="red"
+          value={tens || 0}
           onChange={(e) => dispatch(actions.setTens(e.target.value))}
           sx={{ margin: 0, padding: 0 }}
         />
@@ -93,13 +96,14 @@ function Sliders() {
       </div>
 
       <div className="hundredth">
-        <p align="center">{hundreds}</p>
+        <p align="center">{hundreds || 0}</p>
         <Slider
           defaultValue={0}
           min={0}
           max={9}
           valueLabelDisplay="off"
           color="red"
+          value={hundreds || 0}
           onChange={(e) => dispatch(actions.setHund(e.target.value))}
           sx={{ margin: 0, padding: 0 }}
         />
@@ -107,13 +111,14 @@ function Sliders() {
       </div>
 
       <div className="thousandth">
-        <p align="center">{thousands}</p>
+        <p align="center">{thousands || 0}</p>
         <Slider
           defaultValue={0}
           min={0}
           max={9}
           valueLabelDisplay="off"
           color="red"
+          value={thousands || 0}
           onChange={(e) => dispatch(actions.setThou(e.target.value))}
           sx={{ margin: 0, padding: 0 }}
         />
@@ -128,6 +133,7 @@ function Sliders() {
           max={50}
           valueLabelDisplay="off"
           color="gold"
+          value={years || 30}
           onChange={(e) => dispatch(actions.setYears(e.target.value))}
           sx={{ margin: 0, padding: 0 }}
         />

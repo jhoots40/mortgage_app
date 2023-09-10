@@ -38,18 +38,18 @@ const columns = [
     color: "rgb(186, 137, 86)",
   },
   {
-    id: "interest",
-    label: "Interest",
+    id: "payment",
+    label: "Payment",
     minWidth: "16.666%",
     align: "left",
-    color: "rgb(188, 44, 42)",
+    color: "rgb(86, 133, 63)",
   },
   {
-    id: "principal",
-    label: "Principal",
+    id: "extra",
+    label: "Extra",
     minWidth: "16.666%",
     align: "left",
-    color: "rgb(77, 110, 208)",
+    color: "rgb(102, 198, 77)",
   },
   {
     id: "total",
@@ -74,7 +74,7 @@ const columns = [
   },
 ];
 
-function MonthTable({ mortgage }) {
+function PaymentTable({ mortgage }) {
   const startYear = useSelector((state) => state.start_year);
   const totalYears = useSelector((state) => state.years);
   const principal = useSelector((state) => state.principal);
@@ -172,11 +172,9 @@ function MonthTable({ mortgage }) {
                 >
                   <TableCell align="center">{val.month}</TableCell>
                   <TableCell align="center">
-                    {val.int_payment.toFixed(2)}
+                    {(val.int_payment + val.prin_payment).toFixed(2)}
                   </TableCell>
-                  <TableCell align="center">
-                    {val.prin_payment.toFixed(2)}
-                  </TableCell>
+                  <TableCell align="center">{(0.0).toFixed(2)}</TableCell>
                   <TableCell align="center">
                     {(val.int_payment + val.prin_payment).toFixed(2)}
                   </TableCell>
@@ -196,4 +194,4 @@ function MonthTable({ mortgage }) {
   );
 }
 
-export default MonthTable;
+export default PaymentTable;
